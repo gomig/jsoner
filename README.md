@@ -9,7 +9,7 @@ You can filter nested field with path using `.` separator (e.g. `user.address` w
 **NOTE:** you can use "JsonerIndent" method to generate json with indent.
 
 ```go
-import "github.com/gomig/utils"
+import "github.com/gomig/jsoner"
 type Book struct {
     Title string
     ISBN  string `json:"isbn"`
@@ -39,11 +39,11 @@ john := Author{
     PrivateField: "Some private information",
     ignored: "i'm ignored"
 }
-options := map[string]utils.JsonerOption{
+options := map[string]jsoner.JsonerOption{
     ".":            {Ignore: []string{"family"}}, // ignore family field from root struct
     "author_books": {Only: []string{"title"}},    // only marshal title field of author books
 }
-bytes, _ := utils.Jsoner(john, options)
+bytes, _ := jsoner.Jsoner(john, options)
 fmt.Println(string(bytes))
 
 /*
